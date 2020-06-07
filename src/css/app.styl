@@ -1,0 +1,71 @@
+// app global css in Stylus form
+@import "~normalize.css"
+
+.text-theme-darker
+  color $theme-darker !important
+
+.text-theme-dark
+  color $theme-dark !important
+
+.text-theme-dark-mini
+  color $theme-dark-mini !important
+
+.text-theme-light
+  color $theme-light !important
+
+.text-theme-lighter
+  color $theme-lighter !important
+
+.bg-theme-darker
+  background-color $theme-darker !important
+
+.bg-theme-dark
+  background-color $theme-dark !important
+
+.bg-theme-dark-mini
+  background-color $theme-dark-mini !important
+
+.bg-theme-dark-grey
+  background-color $theme-dark-gray !important
+
+.bg-theme-light
+  background-color $theme-light !important
+
+.bg-theme-lighter
+  background-color $theme-lighter !important
+
+.bg-theme-linear
+  background-image linear-gradient(to bottom right, $theme-dark, $theme-darker) !important
+
+.bg-theme-input
+  background-color #edf2f7 !important
+
+.decoration-none
+  text-decoration none
+
+.divide
+  display table
+  white-space nowrap
+  &::before, &::after
+    content ""
+    display table-cell
+    position relative
+    top 50%
+    width 50%
+    border-top 1px solid $grey-6
+    -webkit-transform translateY(50%)
+    transform translateY(50%)
+
+.q-field--standout
+  .q-field__control
+    background-color #edf2f7 !important
+  &.q-field--focused
+    .q-field__control
+      background-color #edf2f7 !important
+      background-image linear-gradient(to bottom right, $theme-dark, $theme-darker) !important
+
+.hover-shadow
+  transition all .2s ease
+  &:hover
+    box-shadow $shadow-6 !important
+    transform translateY(-5px)
