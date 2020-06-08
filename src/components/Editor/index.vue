@@ -4,8 +4,8 @@
     unit="%"
     before-class="z-index-unset tiptap tiptap-editor quasar-tiptap"
     after-class="z-index-unset after-sticky"
-    separator-style="background-color: transparent"
-    :limits="[60, 88]">
+    separator-style="margin-top: 30px; position: sticky; top: 52px"
+    :limits="[60, 100]">
     <template v-slot:before>
       <q-no-ssr tag="div"
                 class="row q-mt-lg no-wrap q-mx-auto q-px-xl"
@@ -15,7 +15,7 @@
       </q-no-ssr>
     </template>
     <template v-slot:after>
-      <q-scroll-area style="height: calc(100vh - 50px - 48px - 52px)">
+      <q-scroll-area style="height: calc(100vh - 50px - 48px - 52px); min-width: 200px">
         <toc :toc="toc"
              class="q-py-lg" />
       </q-scroll-area>
@@ -332,6 +332,7 @@ export default {
 .after-sticky
   position sticky
   top 52px
+  overflow hidden
 
 .z-index-unset
   z-index unset !important

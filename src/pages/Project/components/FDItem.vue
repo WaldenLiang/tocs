@@ -11,7 +11,7 @@
       <q-item-section avatar>
         <q-avatar :icon="expand ? 'folder_open' : 'folder'" />
       </q-item-section>
-      <q-item-section>
+      <q-item-section style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden">
         {{ fd.name }}
       </q-item-section>
       <q-item-section side>
@@ -82,7 +82,7 @@
                     class="q-item-icon__c">
       <q-icon name="insert_drive_file" />
     </q-item-section>
-    <q-item-section>{{ fd.name }}</q-item-section>
+    <q-item-section style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden">{{ fd.name }}</q-item-section>
     <q-item-section side>
       <q-btn round
              flat

@@ -3,15 +3,15 @@
     <q-splitter
       v-model="splitterModel"
       unit="px"
-      :limits="[200, 400]"
+      :limits="[0, 400]"
       style="width: 95%"
       separator-class="menu-separator hover-show"
-      separator-style="background-color: transparent; width: 10px; height: calc(100vh - 50px)"
+      separator-style="background-color: transparent; width: 0; height: calc(100vh - 50px)"
       before-class="splitter-before"
       class="q-mx-auto relative-position">
       <template v-slot:before>
         <div class="q-py-lg"
-             style="height: calc(100vh - 50px)">
+             style="height: calc(100vh - 50px); min-width: 200px; padding-right: 10px">
           <q-scroll-area class="rounded-borders bg-white full-height splitter-shadow"
                          style="overflow-y: auto">
             <q-item clickable
@@ -28,7 +28,7 @@
               <q-item-section avatar>
                 <q-icon name="library_books" />
               </q-item-section>
-              <q-item-section>FOLDERS & DOCUMENTS</q-item-section>
+              <q-item-section style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden">FOLDERS & DOCUMENTS</q-item-section>
               <q-item-section side>
                 <q-btn round
                        flat
@@ -104,7 +104,7 @@
         <q-avatar color="theme-lighter"
                   text-color="white"
                   size="30px"
-                  icon="chevron_right" />
+                  icon="chevron_left" />
       </template>
       <template v-slot:after>
         <div class="q-py-lg column"
