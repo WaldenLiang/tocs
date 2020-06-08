@@ -4,7 +4,7 @@
     <section class="row col-12 justify-between items-center bg-light tiptap-menubar">
 
       <!-- Toolbar: left -->
-      <section class="row menubar is-hidden"
+      <section class="row menubar is-hidden items-center"
                :class="{ 'is-focused': editorContext.focused }">
         <!-- Table -->
         <template v-if="editorContext.isActive.table && editorContext.isActive.table()">

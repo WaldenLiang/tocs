@@ -2,6 +2,7 @@
   <o-menubar-btn icon="add"
                  :tooltip="$t('editor.addMore')"
                  class="text-theme-lighter o-add-more-btn bg-theme-dark"
+                 style="margin-top: -4px"
                  round
                  :flat="false">
     <q-menu ref="addPopover"
@@ -150,6 +151,12 @@ export default {
 </script>
 
 <style lang="stylus">
-.o-add-more-btn {
-}
+.o-add-more-btn
+  width 24px !important
+  height 24px !important
+  min-width unset
+  .q-btn__wrapper
+    min-width unset !important
+    min-height unset !important
+    height 24px !important
 </style>

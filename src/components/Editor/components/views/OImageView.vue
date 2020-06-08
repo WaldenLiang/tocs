@@ -189,7 +189,7 @@ export default {
         }
       }).catch(err => {
         console.warn('error', err)
-        this.src = 'https://www.donote.info/statics/logo.png'
+        this.src = './statics/images/broken-image.png'
         this.resolveImage(true)
       })
     },

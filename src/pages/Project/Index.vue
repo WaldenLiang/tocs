@@ -5,8 +5,8 @@
       unit="px"
       :limits="[200, 400]"
       style="width: 95%"
-      separator-class="hover-show"
-      separator-style="background-color: transparent; width: 10px"
+      separator-class="menu-separator hover-show"
+      separator-style="background-color: transparent; width: 10px; height: calc(100vh - 50px)"
       before-class="splitter-before"
       class="q-mx-auto relative-position">
       <template v-slot:before>
@@ -99,6 +99,12 @@
             </q-item>
           </q-scroll-area>
         </div>
+      </template>
+      <template v-slot:separator>
+        <q-avatar color="theme-lighter"
+                  text-color="white"
+                  size="30px"
+                  icon="chevron_right" />
       </template>
       <template v-slot:after>
         <div class="q-py-lg column"
@@ -284,20 +290,26 @@ export default {
 <style lang="stylus">
 .q-splitter__before, .q-splitter__after
   overflow unset
+
 .splitter-before
   position sticky
   top 0
+
   .q-item__section--avatar
     min-width auto
+
   .directory
     .q-item__section--avatar
       padding-right 0
+
     .q-item-icon__c
       padding-right 8px
+
 .hover-show
   .drag-btn
     opacity 0
     transition all .3s ease
+
   &:hover
     .drag-btn
       opacity 1
@@ -308,4 +320,8 @@ export default {
 .event-log-drawer
   .event-log-item:nth-child(odd)
     background-color $theme-darker
+
+.menu-separator
+  position sticky
+  top 0
 </style>
