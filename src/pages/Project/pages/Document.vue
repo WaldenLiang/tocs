@@ -51,11 +51,12 @@
                  size="12px"
                  icon="more_vert"
                  text-color="theme-dark">
-            <q-menu>
+            <q-menu content-class="bg-theme-linear text-theme-lighter">
               <q-list style="min-width: 100px">
                 <q-item clickable
-                        v-close-popup>
-                  <q-item-section>New tab</q-item-section>
+                        v-close-popup
+                        @click="showToolbar = !showToolbar">
+                  <q-item-section>Toggle Show Toolbar</q-item-section>
                 </q-item>
                 <q-item clickable
                         v-close-popup>
@@ -89,21 +90,25 @@
           </q-btn>
         </div>
       </div>
-      <div v-if="editorReady"
-           class="tiptap tiptap-editor quasar-tiptap">
-        <o-editor-menu-bar :editor="$refs.editor.getEditor()"
-                           :toolbar="editorMenuBar">
-          <template slot="left">
-            <slot name="toolbar-left" />
-          </template>
-          <template slot="right">
-            <slot name="toolbar-right" />
-          </template>
-        </o-editor-menu-bar>
-      </div>
+      <q-slide-transition>
+        <div v-if="editorReady"
+             v-show="showToolbar"
+             class="tiptap tiptap-editor quasar-tiptap">
+          <o-editor-menu-bar :editor="$refs.editor.getEditor()"
+                             :toolbar="editorMenuBar">
+            <template slot="left">
+              <slot name="toolbar-left" />
+            </template>
+            <template slot="right">
+              <slot name="toolbar-right" />
+            </template>
+          </o-editor-menu-bar>
+        </div>
+      </q-slide-transition>
     </div>
     <editor ref="editor"
             v-model="content"
+            :show-toolbar="showToolbar"
             @on-editor-ready="editorReady = true" />
   </div>
 </template>
@@ -157,6 +162,7 @@ export default {
       scrollInfo: {},
       editorReady: false,
       pageView: 'page',
+      showToolbar: false,
       menu: {
         add: false
       },
@@ -178,6 +184,7 @@ export default {
   top 0
   z-index 1000
   transition all .3s ease
+
 .shadow-bottom
   box-shadow 0 5px 5px rgba(199, 199, 199, .2)
 </style>

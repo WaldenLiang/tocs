@@ -3,8 +3,8 @@
     v-model="splitterModel"
     unit="%"
     before-class="z-index-unset tiptap tiptap-editor quasar-tiptap"
-    after-class="z-index-unset after-sticky"
-    separator-style="margin-top: 30px; position: sticky; top: 52px"
+    :after-class="['z-index-unset', 'after-sticky', showToolbar ? 'plus-sticky-top' : 'default-sticky-top']"
+    :separator-style="{position: 'sticky', height: 'calc(100vh - 50px - 48px - 52px)', top: `${ showToolbar ? 82 + 40 : 82 }px`, backgroundColor: splitterModel === 100 ? 'transparent' : '#edf2f7' }"
     :limits="[60, 100]">
     <template v-slot:before>
       <q-no-ssr tag="div"
@@ -96,9 +96,26 @@ export default {
       type: Boolean,
       default: false
     },
-    showToc: {
+    showToolbar: {
       type: Boolean,
-      default: true
+      default: false
+    }
+  },
+  computed: {
+    toc () {
+      const headings = (this.json.content || []).filter(item => item.type === 'heading')
+      const _toc = []
+      const parentNode = _toc // 记录父节点
+      let lastNode = null // 记录上次插入的节点，用于与当前比较
+      headings.forEach(item => {
+        if (lastNode === null || item.attrs.level === lastNode.attrs.level) { // 如果是第一个节点，直接插入，或者如果节点等级相同，直接在父节点中插入
+          item.content && parentNode.push({
+            label: item.content.map(i => i.text).join('')
+          })
+          lastNode = item
+        }
+      })
+      return _toc
     }
   },
   data () {
@@ -106,144 +123,7 @@ export default {
       editor: null,
       html: '',
       json: {},
-      splitterModel: 80,
-      toc: [
-        {
-          label: 'Satisfied customers (with avatar)',
-          children: [
-            {
-              label: 'Good food (with icon)',
-              children: [
-                { label: 'Quality ingredients' },
-                { label: 'Good recipe' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node with icon)',
-              children: [
-                { label: 'Prompt attention' },
-                { label: 'Professional waiter' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings (with icon)',
-              children: [
-                { label: 'Happy atmosphere (with image)' },
-                { label: 'Good table presentation' },
-                { label: 'Pleasing decor' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Satisfied customers (with avatar)',
-          children: [
-            {
-              label: 'Good food (with icon)',
-              children: [
-                { label: 'Quality ingredients' },
-                { label: 'Good recipe' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node with icon)',
-              children: [
-                { label: 'Prompt attention' },
-                { label: 'Professional waiter' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings (with icon)',
-              children: [
-                { label: 'Happy atmosphere (with image)' },
-                { label: 'Good table presentation' },
-                { label: 'Pleasing decor' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Satisfied customers (with avatar)',
-          children: [
-            {
-              label: 'Good food (with icon)',
-              children: [
-                { label: 'Quality ingredients' },
-                { label: 'Good recipe' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node with icon)',
-              children: [
-                { label: 'Prompt attention' },
-                { label: 'Professional waiter' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings (with icon)',
-              children: [
-                { label: 'Happy atmosphere (with image)' },
-                { label: 'Good table presentation' },
-                { label: 'Pleasing decor' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Satisfied customers (with avatar)',
-          children: [
-            {
-              label: 'Good food (with icon)',
-              children: [
-                { label: 'Quality ingredients' },
-                { label: 'Good recipe' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node with icon)',
-              children: [
-                { label: 'Prompt attention' },
-                { label: 'Professional waiter' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings (with icon)',
-              children: [
-                { label: 'Happy atmosphere (with image)' },
-                { label: 'Good table presentation' },
-                { label: 'Pleasing decor' }
-              ]
-            }
-          ]
-        },
-        {
-          label: 'Satisfied customers (with avatar)',
-          children: [
-            {
-              label: 'Good food (with icon)',
-              children: [
-                { label: 'Quality ingredients' },
-                { label: 'Good recipe' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node with icon)',
-              children: [
-                { label: 'Prompt attention' },
-                { label: 'Professional waiter' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings (with icon)',
-              children: [
-                { label: 'Happy atmosphere (with image)' },
-                { label: 'Good table presentation' },
-                { label: 'Pleasing decor' }
-              ]
-            }
-          ]
-        }
-      ]
+      splitterModel: 80
     }
   },
   mounted () {
@@ -314,8 +194,14 @@ export default {
             notAfter: ['paragraph']
           }),
           new OAlign()
-        ]
+        ],
+        onUpdate: ({ getJSON, getHTML }) => {
+          self.json = getJSON()
+          console.log(self.json)
+        }
       })
+
+      this.json = self.editor.getJSON()
 
       this.$emit('on-editor-ready')
     },
@@ -331,8 +217,13 @@ export default {
 
 .after-sticky
   position sticky
-  top 52px
   overflow hidden
+
+  &.default-sticky-top
+    top 52px
+
+  &.plus-sticky-top
+    top 92px
 
 .z-index-unset
   z-index unset !important
