@@ -4,6 +4,7 @@
               :key="index"
               :label="item.label"
               :children="item.children"
+              :anchor="item.anchor"
               :depth="depth">
       <toc :toc="item.children"
            :depth="depth + 1" />

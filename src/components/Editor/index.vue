@@ -83,6 +83,35 @@ import {
   PrismCodeBlock
 } from 'components/Editor/extentions'
 
+function nestToc (queue, item) {
+  const last = queue[queue.length - 1]
+  // eslint-disable-next-line no-prototype-builtins
+  if (last.hasOwnProperty('length')) {
+    const current = {
+      label: item.content.map(i => i.text).join(''),
+      level: item.attrs.level,
+      anchor: item.attrs.id
+    }
+    last.push(current)
+    queue.push(current)
+  } else if (item.attrs.level === last.level) {
+    queue.pop()
+    nestToc(queue, item)
+  } else if (item.attrs.level < last.level) {
+    queue.pop()
+    nestToc(queue, item)
+  } else {
+    if (!last.children) last.children = []
+    const current = {
+      label: item.content.map(i => i.text).join(''),
+      level: item.attrs.level,
+      anchor: item.attrs.id
+    }
+    last.children.push(current)
+    queue.push(current)
+  }
+}
+
 export default {
   components: {
     Toc,
@@ -105,14 +134,10 @@ export default {
     toc () {
       const headings = (this.json.content || []).filter(item => item.type === 'heading')
       const _toc = []
-      const parentNode = _toc // 记录父节点
-      let lastNode = null // 记录上次插入的节点，用于与当前比较
+      const queue = [_toc]
       headings.forEach(item => {
-        if (lastNode === null || item.attrs.level === lastNode.attrs.level) { // 如果是第一个节点，直接插入，或者如果节点等级相同，直接在父节点中插入
-          item.content && parentNode.push({
-            label: item.content.map(i => i.text).join('')
-          })
-          lastNode = item
+        if (item.content) {
+          nestToc(queue, item)
         }
       })
       return _toc
@@ -197,7 +222,6 @@ export default {
         ],
         onUpdate: ({ getJSON, getHTML }) => {
           self.json = getJSON()
-          console.log(self.json)
         }
       })
 

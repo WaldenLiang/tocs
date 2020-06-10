@@ -13,13 +13,25 @@
     expand-icon-toggle
     :header-inset-level="0.3 * depth"
     header-class="text-theme-dark">
+    <template v-slot:header>
+       <q-item-section>
+           <a :href="`${currentRoute}#${anchor}`"
+              class="decoration-none text-theme-dark toc-link"
+              style="font-weight: 500">{{ label }}</a>
+       </q-item-section>
+    </template>
+
     <slot></slot>
   </q-expansion-item>
   <q-item v-else
           dense
           :inset-level="0.1 + 0.3 * depth"
           class="text-theme-dark">
-    <q-item-section>{{ label }}</q-item-section>
+    <q-item-section>
+      <a :href="`${currentRoute}#${anchor}`"
+         class="decoration-none text-theme-dark toc-link"
+         style="font-weight: 500">{{ label }}</a>
+    </q-item-section>
   </q-item>
 </template>
 
@@ -37,24 +49,41 @@ export default {
       required: true,
       default: ''
     },
+    anchor: {
+      type: String,
+      require: false,
+      default: ''
+    },
     children: {
       type: Array,
       required: false,
       default: null
+    }
+  },
+  computed: {
+    currentRoute () {
+      return `${window.location.origin}${this.$route.path}`
     }
   }
 }
 </script>
 
 <style lang="stylus">
+.toc-link
+  &:hover
+    color $theme-lighter !important
+
 .toc-item
   .q-item
     padding-top 4px
     padding-bottom 4px
+
   .q-item__section--avatar
     min-width auto !important
+
   .q-item__section--avatar
     padding-right 8px !important
+
   .toc-item-expand-icon
     .q-expansion-item__toggle-focus, .q-expansion-item__toggle-icon
       font-size 16px !important
