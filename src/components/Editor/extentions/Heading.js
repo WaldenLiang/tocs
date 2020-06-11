@@ -19,10 +19,8 @@ function getAttrs (dom) {
   const attrs = getParagraphNodeAttrs(dom)
   const id = dom.getAttribute('id')
   const level = parseInt(dom.getAttribute('level'), 10) || 0
-  const name = dom.getAttribute('name')
   attrs.id = id
   attrs.level = level
-  attrs.name = name
   return attrs
 }
 
@@ -31,9 +29,8 @@ function toDOM (node) {
   const id = node.attrs.id || getUuid()
   const level = node.attrs.level || 1
   dom[0] = 'h'.concat(node.attrs.level)
-  dom[1].id = id
+  dom[1].id = `anchor_${id}`
   dom[1].level = level
-  dom[1].name = id
 
   node.attrs.id = id
 
@@ -60,9 +57,6 @@ export default class Heading extends Node {
           default: 1
         },
         id: {
-          default: ''
-        },
-        name: {
           default: ''
         }
       },

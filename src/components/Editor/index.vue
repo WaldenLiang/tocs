@@ -135,6 +135,7 @@ export default {
       const headings = (this.json.content || []).filter(item => item.type === 'heading')
       const _toc = []
       const queue = [_toc]
+      console.log(headings)
       headings.forEach(item => {
         if (item.content) {
           nestToc(queue, item)
@@ -158,6 +159,7 @@ export default {
     initEditor () {
       const self = this
       self.editor = new Editor({
+        editable: true,
         content: self.value,
         extensions: [
           new OTitle(),

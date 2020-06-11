@@ -1,6 +1,6 @@
 <template>
   <q-page class="overflow-hidden">
-    <div class="full-width"
+    <q-scroll-area class="full-width"
          style="overflow-y: auto; height: calc(100vh - 50px)">
       <div class="row q-mx-auto relative-position"
            style="max-width: 1200px; min-height: 100%">
@@ -37,7 +37,7 @@
           </transition>
         </div>
       </div>
-    </div>
+    </q-scroll-area>
   </q-page>
 </template>
 
@@ -109,9 +109,11 @@ export default {
 .menu
   .item
     color $theme-dark-gray
+
     &.active
       background-image linear-gradient(to bottom right, $theme-dark-gray, $theme-dark)
       color $theme-lighter
+
     &:hover
       background-color $theme-placeholder
 </style>

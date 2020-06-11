@@ -67,7 +67,6 @@
                 :key="item.id"
                 :fd="item"
                 :depth="depth + 1" />
-
     </draggable>
   </q-expansion-item>
   <q-item v-else
@@ -77,7 +76,7 @@
           dense
           :to="`/project/${$route.params.id}/doc/${fd.id}`"
           :active="$route.name === 'ProjectDocument' && $route.params.documentId === fd.id"
-          exact-active-class="active bg-theme-linear text-theme-lighter">
+          active-class="active bg-theme-linear text-theme-lighter">
     <q-item-section avatar
                     class="q-item-icon__c">
       <q-icon name="insert_drive_file" />

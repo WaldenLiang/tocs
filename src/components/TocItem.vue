@@ -15,9 +15,9 @@
     header-class="text-theme-dark">
     <template v-slot:header>
        <q-item-section>
-           <a :href="`${currentRoute}#${anchor}`"
-              class="decoration-none text-theme-dark toc-link"
-              style="font-weight: 500">{{ label }}</a>
+           <router-link :to="`${currentRoute}#anchor_${anchor}`"
+                        class="decoration-none text-theme-dark toc-link"
+                        style="font-weight: 500">{{ label }}</router-link>
        </q-item-section>
     </template>
 
@@ -28,9 +28,9 @@
           :inset-level="0.1 + 0.3 * depth"
           class="text-theme-dark">
     <q-item-section>
-      <a :href="`${currentRoute}#${anchor}`"
-         class="decoration-none text-theme-dark toc-link"
-         style="font-weight: 500">{{ label }}</a>
+      <router-link :to="`${currentRoute}#anchor_${anchor}`"
+                   class="decoration-none text-theme-dark toc-link"
+                   style="font-weight: 500">{{ label }}</router-link>
     </q-item-section>
   </q-item>
 </template>
@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     currentRoute () {
-      return `${window.location.origin}${this.$route.path}`
+      return `${this.$route.path}`
     }
   }
 }
