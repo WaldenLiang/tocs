@@ -1,7 +1,7 @@
 <template>
   <q-page class="overflow-hidden">
     <q-scroll-area class="full-width"
-         style="overflow-y: auto; height: calc(100vh - 50px)">
+                   style="overflow-y: auto; height: calc(100vh - 50px)">
       <div class="row q-mx-auto relative-position"
            style="max-width: 1200px; min-height: 100%">
         <div class="menu col-3 q-pr-xl q-pt-xl"
@@ -47,27 +47,28 @@ export default {
   data () {
     return {
       menu: [{
-        links: [{
-          icon: 'home',
-          label: 'HOME',
-          to: '/'
-        }, {
-          icon: 'folder',
-          label: 'PROJECT',
-          to: '/project'
-        }, {
-          icon: 'collections',
-          label: 'TEMPLATE',
-          to: '/template'
-        }, {
-          icon: 'book',
-          label: 'READING LINK',
-          to: '/reading-link'
-        }, {
-          icon: 'delete',
-          label: 'RECYCLE BIN',
-          to: '/recycle-bin'
-        }]
+        links: [
+          {
+            icon: 'home',
+            label: 'HOME',
+            to: '/'
+          },
+          {
+            icon: 'folder',
+            label: 'PROJECT',
+            to: '/project'
+          },
+          {
+            icon: 'book',
+            label: 'TECHNICAL ARTICLE',
+            to: '/reading-link'
+          },
+          {
+            icon: 'delete',
+            label: 'RECYCLE BIN',
+            to: '/recycle-bin'
+          }
+        ]
       }, {
         label: 'RECENT PROJECTS',
         links: [{

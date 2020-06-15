@@ -1,39 +1,21 @@
 <template>
   <div>
-    <q-card>
-      <q-card-section>
-        <div class="row items-center no-wrap">
-          <div class="col">
-            <div class="text-h6">Our Changing Planet</div>
-          </div>
+    <q-card class="my-card" flat bordered>
+      <q-img
+        src="https://cdn.quasar.dev/img/parallax2.jpg"
+      />
 
-          <div class="col-auto">
-            <q-btn color="grey-7"
-                   round
-                   flat
-                   icon="more_vert">
-              <q-menu auto-close>
-                <q-list>
-                  <q-item clickable>
-                    <q-item-section>Remove Card</q-item-section>
-                  </q-item>
-                  <q-item clickable>
-                    <q-item-section>Send Feedback</q-item-section>
-                  </q-item>
-                  <q-item clickable>
-                    <q-item-section>Share</q-item-section>
-                  </q-item>
-                </q-list>
-              </q-menu>
-            </q-btn>
-          </div>
+      <q-card-section>
+        <div class="text-h5 q-mt-sm q-mb-xs">WebRTC原理及服务器搭建方法</div>
+        <div class="text-caption text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </q-card-section>
+      <q-card-actions>
+        <q-btn flat color="dark" label="Share" />
+        <q-btn flat color="primary" label="Book" />
+      </q-card-actions>
     </q-card>
   </div>
 </template>
